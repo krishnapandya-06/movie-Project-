@@ -26,4 +26,22 @@ router.post('/add', upload.single('image'), async (req, res) => {
   res.redirect('/');
 });
 
+router.get('/edit/:id', async (req, res) => {
+  const movie = await Movie.findById(req.params.id);
+  res.render('edit', { movie });
+});
+
+router.post('/edit/:id', upload.single('image'), async (req, res) => {
+  const { name, releaseDate, type, genre, description, rating, review, cast } = req.body;
+  const updateData = { name, releaseDate, type, genre, description, rating, review, cast };
+  if (req.file) updateData.image = req.file.filename;
+  await Movie.findByIdAndUpdate(req.params.id, updateData);
+  res.redirect('/');
+});
+
+router.post('/delete/:id', async (req, res) => {
+  await Movie.findByIdAndDelete(req.params.id);
+  res.redirect('/');
+});
+
 module.exports = router;

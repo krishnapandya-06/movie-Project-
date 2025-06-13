@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Movie</title>
+  <link rel="stylesheet" href="/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+  <h1>Edit Movie</h1>
+  <form action="/edit/<%= movie._id %>" method="POST" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label>Movie Name</label>
+      <input type="text" name="name" class="form-control" value="<%= movie.name %>" required>
+    </div>
+    <div class="mb-3">
+      <label>Release Date</label>
+      <input type="date" name="releaseDate" class="form-control" value="<%= movie.releaseDate.toISOString().split('T')[0] %>" required>
+    </div>
+    <div class="mb-3">
+      <label>Movie Type</label>
+      <input type="text" name="type" class="form-control" value="<%= movie.type %>" required>
+    </div>
+    <div class="mb-3">
+      <label>Movie Image (upload new if want to change)</label>
+      <input type="file" name="image" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label>Genre</label>
+      <input type="text" name="genre" class="form-control" value="<%= movie.genre %>" required>
+    </div>
+    <div class="mb-3">
+      <label>Description</label>
+      <textarea name="description" class="form-control" rows="3" required><%= movie.description %></textarea>
+    </div>
+    <div class="mb-3">
+      <label>Rating</label>
+      <input type="number" name="rating" class="form-control" value="<%= movie.rating %>" min="0" max="10" step="0.1" required>
+    </div>
+    <div class="mb-3">
+      <label>Review</label>
+      <textarea name="review" class="form-control" rows="2" required><%= movie.review %></textarea>
+    </div>
+    <div class="mb-3">
+      <label>Cast</label>
+      <input type="text" name="cast" class="form-control" value="<%= movie.cast %>" required>
+    </div>
+    <button type="submit" class="btn btn-success">Update Movie</button>
+  </form>
+</div>
+</body>
+</html>
